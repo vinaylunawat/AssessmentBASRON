@@ -10,7 +10,7 @@ namespace BASRON.Business.Request.Types
             Name = "requestCreateInput";
             Field<NonNullGraphType<IdGraphType>>("customerId");
             Field<NonNullGraphType<DateGraphType>>("transactionDate");
-            Field<NonNullGraphType<IdGraphType>>("referenceNumber");
+            Field<IdGraphType>("referenceNumber");
             Field<NonNullGraphType<StringGraphType>>("customerName");
             Field<NonNullGraphType<DecimalGraphType>>("amount");
             Field<NonNullGraphType<StringGraphType>>("status");

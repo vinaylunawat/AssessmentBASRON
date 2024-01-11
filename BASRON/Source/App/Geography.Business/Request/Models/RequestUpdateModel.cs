@@ -8,7 +8,7 @@ namespace BASRON.Business.Request.Models
     /// </summary>
     public class RequestUpdateModel //: RequestReadModel
     {
-        public Guid Id { get; set; }
+        public Guid ReferenceNumber { get; set; }
         public string CustomerId { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }

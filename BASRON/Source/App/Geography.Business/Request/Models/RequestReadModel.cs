@@ -14,7 +14,6 @@ namespace BASRON.Business.Request.Models
         public decimal Amount { get; set; }
         public string Status { get; set; }
         public string CustomerName { get; set; }
-
         public string Remark { get; set; }
         public string TransactionType { get; set; }
     }

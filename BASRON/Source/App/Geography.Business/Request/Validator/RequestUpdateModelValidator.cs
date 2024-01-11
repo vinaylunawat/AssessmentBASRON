@@ -7,7 +7,7 @@ namespace BASRON.Business.Request.Validator
     {
         public RequestUpdateModelValidator()
         {
-            RuleFor(x => x.CustomerId).NotEmpty().WithMessage("Customer is required");
+            RuleFor(x => x.ReferenceNumber).NotEmpty().WithMessage("Customer is required");
 
             RuleFor(x => x.Status).NotEmpty().WithMessage("Status is required");
 

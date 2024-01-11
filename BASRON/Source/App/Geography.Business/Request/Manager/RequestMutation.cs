@@ -79,7 +79,7 @@ namespace BASRON.Business.Request.Manager
                 return null;
             }
 
-            var dbEntity = await _requestRepository.GetByKey(updateModel.Id, default).ConfigureAwait(false);
+            var dbEntity = await _requestRepository.GetByKey(updateModel.ReferenceNumber, default).ConfigureAwait(false);
             if (dbEntity == null)
             {
                 context.Errors.Add(new ExecutionError("Couldn't find request in db."));

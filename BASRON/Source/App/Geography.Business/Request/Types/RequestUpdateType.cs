@@ -7,11 +7,10 @@ namespace BASRON.Business.Request.Types
     {
         public RequestUpdateInputType()
         {
-            Name = "RequestUpdateInput";
-            Field<IdGraphType>("Id");
-            Field<NonNullGraphType<IdGraphType>>("customerId");
+            Name = "requestUpdateInput";
+            Field<IdGraphType>("referenceNumber");
             Field<NonNullGraphType<StringGraphType>>("status");
-            Field<NonNullGraphType<StringGraphType>>("remark");
+            Field<StringGraphType>("remark");
         }
     }
  

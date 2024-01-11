@@ -18,8 +18,6 @@ namespace BASRON.Business.Request.Validator
 
             RuleFor(x => x.TransactionDate).NotEmpty().WithMessage("Transaction Date is required");
 
-            RuleFor(x => x.ReferenceNumber).NotEmpty().WithMessage("Reference Number is required");
-
             RuleFor(x => x.Amount).NotEmpty().WithMessage("Transaction amount is required");
 
             RuleFor(x => x.Status).NotEmpty().WithMessage("Status is required");
