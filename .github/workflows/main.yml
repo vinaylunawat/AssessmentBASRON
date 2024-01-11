@@ -7,7 +7,6 @@ on:
 defaults:
   run:
     working-directory: ./BASRON/Source/App/Geography.Serverless
-
 jobs:
   build:
     runs-on: ubuntu-latest
