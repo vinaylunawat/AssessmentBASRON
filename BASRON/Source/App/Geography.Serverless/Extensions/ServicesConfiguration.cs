@@ -82,7 +82,7 @@ namespace BASRON.Serverless.Extensions
         public static IServiceCollection ConfigureDataProvider(this IServiceCollection services)
         {
             services.AddTransient<BTransactionTableCreationProvider>();
-            services.AddTransient<DisputeTableCreationProvider>();
+            services.AddTransient<RequestTableCreationProvider>();
             return services;
         }
     }

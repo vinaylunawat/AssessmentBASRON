@@ -1,13 +1,13 @@
 using GraphQL.Types;
 using System;
 
-namespace BASRON.Business.Dispute.Types
+namespace BASRON.Business.Request.Types
 {
-    public class DisputeUpdateInputType : InputObjectGraphType
+    public class RequestUpdateInputType : InputObjectGraphType
     {
-        public DisputeUpdateInputType()
+        public RequestUpdateInputType()
         {
-            Name = "disputeUpdateInput";
+            Name = "RequestUpdateInput";
             Field<IdGraphType>("Id");
             Field<NonNullGraphType<IdGraphType>>("customerId");
             Field<NonNullGraphType<StringGraphType>>("status");

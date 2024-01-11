@@ -6,8 +6,8 @@ namespace BASRON.Entity.Entities
     using System;
 
 
-    [DynamoDBTable("Dispute")]
-    public class Dispute
+    [DynamoDBTable("Request")]
+    public class Request
     {
         [DynamoDBHashKey("ReferenceNumber")]
         public Guid ReferenceNumber { get; set; }
@@ -16,7 +16,7 @@ namespace BASRON.Entity.Entities
         public string CustomerName { get; set; }
 
         [DynamoDBProperty("CustomerId")]
-        public Guid CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [DynamoDBProperty("TransactionDate")]
         public DateTime TransactionDate { get; set; }

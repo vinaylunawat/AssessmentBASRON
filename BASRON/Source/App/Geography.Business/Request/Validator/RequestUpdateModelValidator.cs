@@ -1,11 +1,11 @@
 using FluentValidation;
-using BASRON.Business.Dispute.Models;
+using BASRON.Business.Request.Models;
 
-namespace BASRON.Business.Dispute.Validator
+namespace BASRON.Business.Request.Validator
 {
-    public class DisputeUpdateModelValidator : AbstractValidator<DisputeUpdateModel>
+    public class RequestUpdateModelValidator : AbstractValidator<RequestUpdateModel>
     {
-        public DisputeUpdateModelValidator()
+        public RequestUpdateModelValidator()
         {
             RuleFor(x => x.CustomerId).NotEmpty().WithMessage("Customer is required");
 

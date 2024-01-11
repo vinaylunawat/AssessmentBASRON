@@ -7,9 +7,9 @@ namespace BASRON.DataAccess.Repository
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Defines the <see cref="IDisputeRepository" />.
+    /// Defines the <see cref="IRequestRepository" />.
     /// </summary>
-    public interface IDisputeRepository : IGenericRepository<Dispute>
+    public interface IRequestRepository : IGenericRepository<Request>
     {   
     }
 }

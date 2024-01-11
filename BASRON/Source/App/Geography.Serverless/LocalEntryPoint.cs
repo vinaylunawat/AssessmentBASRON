@@ -19,8 +19,8 @@ public class LocalEntryPoint
             var btrasctionProvider = services.GetRequiredService<BTransactionTableCreationProvider>();
             await btrasctionProvider.Initialize("BTransaction");
 
-            var listOfFilesTableCreationProvider = services.GetRequiredService<DisputeTableCreationProvider>();
-            await listOfFilesTableCreationProvider.Initialize("Dispute");
+            var listOfFilesTableCreationProvider = services.GetRequiredService<RequestTableCreationProvider>();
+            await listOfFilesTableCreationProvider.Initialize("Request");
 
         }
         await host.RunAsync();

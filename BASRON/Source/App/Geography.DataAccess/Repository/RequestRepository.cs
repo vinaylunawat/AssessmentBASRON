@@ -6,12 +6,12 @@ namespace BASRON.DataAccess.Repository
     using BASRON.Entity.Entities;
 
     /// <summary>
-    /// Defines the <see cref="DisputeRepository" />.
+    /// Defines the <see cref="RequestRepository" />.
     /// </summary>
-    public class DisputeRepository : GenericRepository<Dispute>, IDisputeRepository
+    public class RequestRepository : GenericRepository<Request>, IRequestRepository
     {
         private readonly IAmazonDynamoDB _client;
-        public DisputeRepository(IDynamoDBContext dbContext, IAmazonDynamoDB client) : base(dbContext, client)
+        public RequestRepository(IDynamoDBContext dbContext, IAmazonDynamoDB client) : base(dbContext, client)
         {
             _client = client;
         }                 

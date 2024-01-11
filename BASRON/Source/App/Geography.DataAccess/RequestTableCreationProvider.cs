@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BASRON.DataAccess
 {
-    public class DisputeTableCreationProvider : DynamoDBClientProviderBase
+    public class RequestTableCreationProvider : DynamoDBClientProviderBase
     {
         private readonly ILogger<DynamoDBClientProviderBase> _logger;
         private readonly IAmazonDynamoDB _client;
-        private const string TableName = "Dispute";
+        private const string TableName = "Request";
 
-        public DisputeTableCreationProvider(ILogger<DynamoDBClientProviderBase> logger, IAmazonDynamoDB amazonDynamoDBClient)
+        public RequestTableCreationProvider(ILogger<DynamoDBClientProviderBase> logger, IAmazonDynamoDB amazonDynamoDBClient)
             : base(logger, amazonDynamoDBClient)
         {
             _logger = logger;
@@ -23,15 +23,15 @@ namespace BASRON.DataAccess
 
         public override async Task CreateTable()
         {
-            Dispute dispute;
-            var request = new CreateTableRequest
+            Request request;
+            var table = new CreateTableRequest
             {
                 TableName = TableName,
                 AttributeDefinitions = new List<AttributeDefinition>()
                     {
                         new AttributeDefinition
                         {
-                                AttributeName = nameof(dispute.ReferenceNumber),
+                                AttributeName = nameof(request.ReferenceNumber),
                                 AttributeType = ScalarAttributeType.S
                         },                       
                     },
@@ -39,7 +39,7 @@ namespace BASRON.DataAccess
                         {
                              new KeySchemaElement
                              {
-                                    AttributeName = nameof(dispute.ReferenceNumber),
+                                    AttributeName = nameof(request.ReferenceNumber),
                                     KeyType =KeyType.HASH
                              },
                              
@@ -50,7 +50,7 @@ namespace BASRON.DataAccess
                     WriteCapacityUnits = 5
                 }
             };
-            await _client.CreateTableAsync(request);
+            await _client.CreateTableAsync(table);
         }
     }
 }

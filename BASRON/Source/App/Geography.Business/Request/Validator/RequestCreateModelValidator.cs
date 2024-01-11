@@ -1,22 +1,24 @@
 using FluentValidation;
-using BASRON.Business.Dispute.Models;
+using BASRON.Business.Request.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BASRON.Business.Dispute.Validator
+namespace BASRON.Business.Request.Validator
 {
-    public class DisputeCreateModelValidator : AbstractValidator<DisputeCreateModel>
+    public class RequestCreateModelValidator : AbstractValidator<RequestCreateModel>
     {
-        public DisputeCreateModelValidator()
+        public RequestCreateModelValidator()
         {            
             RuleFor(x => x.CustomerId).NotEmpty().WithMessage("Customer is required");
 
+            RuleFor(x => x.CustomerName).NotEmpty().WithMessage("Customer Name is required");
+
             RuleFor(x => x.TransactionDate).NotEmpty().WithMessage("Transaction Date is required");
 
-            RuleFor(x => x.ReferenceNumber).NotEmpty().WithMessage("Reference Number Date is required");
+            RuleFor(x => x.ReferenceNumber).NotEmpty().WithMessage("Reference Number is required");
 
             RuleFor(x => x.Amount).NotEmpty().WithMessage("Transaction amount is required");
 
