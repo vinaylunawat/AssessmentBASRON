@@ -1,8 +1,6 @@
 namespace BASRON.Entity.Entities
 {
-    using Amazon.DynamoDBv2.DataModel;
-    using Framework.Entity;
-    using Framework.Entity.Entities;
+    using Amazon.DynamoDBv2.DataModel;    
     using System;
 
 
