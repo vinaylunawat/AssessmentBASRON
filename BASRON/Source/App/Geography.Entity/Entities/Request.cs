@@ -30,6 +30,12 @@ namespace BASRON.Entity.Entities
 
         [DynamoDBProperty("TransactionType")]
         public string TransactionType { get; set; }
+
+        [DynamoDBProperty("CreatedDate")]
+        public DateTime CreatedDate { get; set; }
+
+        [DynamoDBProperty("IsActive")]
+        public bool IsActive { get; set; }
     }
 }
 

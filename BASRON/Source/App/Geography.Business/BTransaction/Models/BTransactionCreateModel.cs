@@ -8,7 +8,7 @@ namespace BASRON.Business.BTransaction.Models
     /// </summary>
     public class BTransactionCreateModel
     {        
-        public Guid CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public DateTime TransactionDate { get; set; }
         public Guid ReferenceNumber { get; set; }
         public decimal Amount { get; set; }

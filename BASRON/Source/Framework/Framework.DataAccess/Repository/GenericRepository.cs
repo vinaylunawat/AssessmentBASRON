@@ -17,6 +17,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -71,23 +72,40 @@
             return await _dynamoDBContext.LoadAsync<TEntity>(key, rangeKey, cancellationToken);
         }
 
-        public async Task<PagedResultModel<TEntity>> GetPaginatedScanItemsAsync(int pageSize = 5, string lastEvaluatedKey = null, IEnumerable<string> projectionFields = default) 
+        public async Task<IEnumerable<TEntity>> GetPaginatedScanItemsAsync(Dictionary<string, string> data = default)
         {
-            Dictionary<string, AttributeValue> lastKeyEvaluated = !lastEvaluatedKey.IsNullOrEmpty() ? new Dictionary<string, AttributeValue> { { "Id", new AttributeValue(lastEvaluatedKey) } } : null;
-            
+            //Dictionary<string, AttributeValue> lastKeyEvaluated = !lastEvaluatedKey.IsNullOrEmpty() ? new Dictionary<string, AttributeValue> { { "Id", new AttributeValue(lastEvaluatedKey) } } : null;
+
             var request = new ScanRequest
             {
                 TableName = typeof(TEntity).Name,
-                ExclusiveStartKey = lastKeyEvaluated,
-                Limit = pageSize,
+                //ExclusiveStartKey = lastKeyEvaluated,
+                //Limit = pageSize,
             };
 
-            if(projectionFields != null && projectionFields.Any())
+            //var expressionAttributeName = new Dictionary<string, string>();
+            var expressionAttributeValues = new Dictionary<string, AttributeValue>();
+            var filterExpression = new StringBuilder();
+            foreach (var item in data)
             {
-                request.ProjectionExpression = string.Join(",", projectionFields.Select(a => $"#{a}"));
+                expressionAttributeValues.Add($":{item.Key.ToLower()}", new AttributeValue(item.Value));
+                filterExpression.Append($"{item.Key} = :{item.Key.ToLower()}");
+                filterExpression.Append(" AND ");
+            }
+
+            var filterExpressionValue = filterExpression.ToString();
+
+            filterExpressionValue = filterExpressionValue.Substring(0, filterExpressionValue.LastIndexOf(" AND "));
+
+            // if (projectionFields != null && projectionFields.Any())
+            {
+                //request.ProjectionExpression = string.Join(",", projectionFields.Select(a => $"#{a}"));
                 var attrNames = new Dictionary<string, string>();
-                projectionFields.ForEach(a => attrNames.Add($"#{a}", a));
-                request.ExpressionAttributeNames = attrNames;
+                //projectionFields.ForEach(a => attrNames.Add($"#{a}", a));
+                //request.UpdateExpression = updateExpression,
+                //request.ExpressionAttributeNames = expressionAttributeName;
+                request.ExpressionAttributeValues = expressionAttributeValues;
+                request.FilterExpression = filterExpressionValue;
             }
 
             var response = await _client.ScanAsync(request);
@@ -99,9 +117,11 @@
             }).ToList();
 
 
-            var hasMorePages = response.LastEvaluatedKey != null;
+            return items;
 
-            return new PagedResultModel<TEntity>(items, hasMorePages ? response.LastEvaluatedKey["Id"].S : null, hasMorePages);
+            //var hasMorePages = response.LastEvaluatedKey != null;
+
+            //return new PagedResultModel<TEntity>(items, hasMorePages ? response.LastEvaluatedKey["ReferenceNumber"].S : null, hasMorePages);
         }
 
         public async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken)

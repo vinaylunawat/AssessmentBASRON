@@ -18,6 +18,9 @@ namespace BASRON.Business.BTransaction.Models
             CreateMap<BTransactionCreateModel, BTransaction>()
                 .ForMember(x => x.ReferenceNumber, opt => opt.Ignore());
 
+            CreateMap<BTransactionReadModel, BTransaction>()
+                .ForMember(x => x.ReferenceNumber, opt => opt.Ignore());
+
             CreateMap<BTransactionUpdateModel, BTransaction>();
         }
     }

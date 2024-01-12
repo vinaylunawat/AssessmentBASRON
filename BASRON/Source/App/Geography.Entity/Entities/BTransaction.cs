@@ -16,7 +16,7 @@ namespace BASRON.Entity.Entities
         public string CustomerName { get; set; }
 
         [DynamoDBProperty("CustomerId")]
-        public Guid CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [DynamoDBProperty("TransactionDate")]
         public DateTime TransactionDate { get; set; }
