@@ -1,12 +1,12 @@
-﻿using BASRON.Serverless.Model;
+using BASRON.Serverless.Model;
 using BASRON.Service;
-using INVCOM.ServerlessTest.Models;
-using INVCOM.ServerlessTest.TestData;
+using BASRON.ServerlessTest.Models;
+using BASRON.ServerlessTest.TestData;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace INVCOM.ServerlessTest.Controllers
+namespace BASRON.ServerlessTest.Controllers
 {
     public class GraphQLControllerTests : XunitMemberDataInput, IClassFixture<TestFixture>
     {
@@ -148,12 +148,12 @@ namespace INVCOM.ServerlessTest.Controllers
             Assert.Equal(200, ((ObjectResult)controllerUpdateResult).StatusCode);
             var updateTransactionResult = JsonConvert.DeserializeObject<UpdateTransactionResponse>(JsonConvert.SerializeObject((((ObjectResult)controllerUpdateResult).Value)));
             Assert.NotNull(updateTransactionResult);
-            Assert.NotNull(updateTransactionResult.updateTransaction);
-            Assert.NotNull(updateTransactionResult.updateTransaction.referenceNumber);
+            Assert.NotNull(updateTransactionResult.updateBTransaction);
+            Assert.NotNull(updateTransactionResult.updateBTransaction.referenceNumber);
             var updateData = ((Dictionary<string, object>)variablesData);
-            Assert.Equal(updateTransactionResult.updateTransaction.referenceNumber.ToString(), updateData["referenceNumber"]);
-            Assert.Equal(updateTransactionResult.updateTransaction.amount.ToString(), updateData["transactionAmount"]);
-            Assert.Equal(updateTransactionResult.updateTransaction.transactionType, updateData["transactionType"]);
+            Assert.Equal(updateTransactionResult.updateBTransaction.referenceNumber.ToString(), updateData["referenceNumber"].ToString());
+            Assert.Equal(updateTransactionResult.updateBTransaction.amount.ToString(), updateData["amount"].ToString());
+            Assert.Equal(updateTransactionResult.updateBTransaction.transactionType, updateData["transactionType"]);
             //Assert.Equal(updateTransactionResult.updateTransaction.continent, updateData["continent"]);
 
 

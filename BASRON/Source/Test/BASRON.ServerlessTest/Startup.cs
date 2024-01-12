@@ -1,4 +1,4 @@
-﻿using BASRON.Business;
+using BASRON.Business;
 using BASRON.Serverless.Extensions;
 using Framework.Business.ServiceProvider.Storage;
 using Framework.Configuration.Models;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace INVCOM.ServerlessTest
+namespace BASRON.ServerlessTest
 {
     /// <summary>
     /// Defines the <see cref="Startup" />.

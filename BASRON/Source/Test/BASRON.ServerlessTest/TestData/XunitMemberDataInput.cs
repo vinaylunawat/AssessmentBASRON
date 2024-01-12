@@ -1,7 +1,7 @@
-﻿using Amazon.Util;
+using Amazon.Util;
 using BASRON.Serverless.Model;
 
-namespace INVCOM.ServerlessTest.TestData
+namespace BASRON.ServerlessTest.TestData
 {
 
     public class XunitMemberDataInput
@@ -134,7 +134,7 @@ namespace INVCOM.ServerlessTest.TestData
                                           }
 
                         },
-                        new GraphQLModel{ Query="mutation($TransactionId: ID!) { deleteTransaction(TransactionId: $TransactionId) }" ,
+                        new GraphQLModel{ Query="mutation($btransactionId: ID!) { deleteBTransaction(btransactionId: $btransactionId) }" ,
                                           Variables=new Dictionary<string, object>
                                           {
                                               { "btransactionId", "-1" }
@@ -174,10 +174,10 @@ namespace INVCOM.ServerlessTest.TestData
            {
                     new GraphQLModel[]
                     {
-                         new GraphQLModel{ Query="mutation($TransactionId: ID!) { deleteTransaction(TransactionId: $TransactionId) }" ,
+                          new GraphQLModel{ Query="mutation($btransactionId: ID!) { deleteBTransaction(btransactionId: $btransactionId) }" ,
                                           Variables=new Dictionary<string, object>
                                           {
-                                              { "TransactionId", "-1" }
+                                              { "btransactionId", "-1" }
                                           }
                         }
                     }

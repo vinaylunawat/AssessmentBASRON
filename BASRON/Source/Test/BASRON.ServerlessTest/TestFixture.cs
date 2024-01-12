@@ -1,4 +1,4 @@
-﻿using BASRON.Service;
+using BASRON.Service;
 using Framework.Configuration;
 using Framework.Configuration.Models;
 using GraphQL;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace INVCOM.ServerlessTest
+namespace BASRON.ServerlessTest
 {
     /// <summary>
     /// Defines the <see cref="TestFixture" />.
