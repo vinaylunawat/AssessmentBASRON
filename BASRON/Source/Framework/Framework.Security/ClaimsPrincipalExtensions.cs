@@ -59,8 +59,8 @@ namespace Framework.Security
                 subjectId = user.First();
             }
 
-            var parsedBTrasction = long.TryParse(subjectId, out var userId);
-            if (!parsedBTrasction)
+            var parsedBTransaction = long.TryParse(subjectId, out var userId);
+            if (!parsedBTransaction)
             {
                 throw new InvalidOperationException($"Invalid SubjectId");
             }
@@ -77,9 +77,9 @@ namespace Framework.Security
         {
             var claimValue = controllerBase.User.FindFirst(CustomClaimTypes.TenantIds)?.Value;
 
-            var parsedBTrasction = long.TryParse(claimValue, out var id);
+            var parsedBTransaction = long.TryParse(claimValue, out var id);
 
-            if (!parsedBTrasction)
+            if (!parsedBTransaction)
             {
                 throw new InvalidOperationException($"Invalid Tenant Id");
             }
@@ -96,9 +96,9 @@ namespace Framework.Security
         {
             var claimValue = controllerBase.User.FindFirst(CustomClaimTypes.CompanyId)?.Value;
 
-            var parsedBTrasction = long.TryParse(claimValue, out var id);
+            var parsedBTransaction = long.TryParse(claimValue, out var id);
 
-            if (!parsedBTrasction)
+            if (!parsedBTransaction)
             {
                 throw new InvalidOperationException($"Invalid Company Id");
             }
@@ -115,9 +115,9 @@ namespace Framework.Security
         {
             var claimValue = controllerBase.User.FindFirst(CustomClaimTypes.CompanyMasterKey)?.Value;
 
-            var parsedBTrasction = Guid.TryParse(claimValue, out var masterKey);
+            var parsedBTransaction = Guid.TryParse(claimValue, out var masterKey);
 
-            if (!parsedBTrasction)
+            if (!parsedBTransaction)
             {
                 throw new InvalidOperationException($"Invalid Company Master Key");
             }

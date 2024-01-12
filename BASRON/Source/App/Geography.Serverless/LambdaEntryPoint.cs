@@ -53,8 +53,8 @@ public class LambdaEntryPoint :
         //    var countryProvider = services.GetRequiredService<CountryTableCreationProvider>();
         //    await countryProvider.Initialize("Country");
 
-        //    var btrasctionProvider = services.GetRequiredService<BTrasctionTableCreationProvider>();
-        //    await btrasctionProvider.Initialize("BTrasction");
+        //    var btransactionProvider = services.GetRequiredService<BTransactionTableCreationProvider>();
+        //    await btransactionProvider.Initialize("BTransaction");
 
         //}
     }

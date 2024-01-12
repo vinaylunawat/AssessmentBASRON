@@ -6,13 +6,13 @@
 
   <ItemGroup>
     <Compile Remove="AuthToken\**" />
-    <Compile Remove="GraphQL\BTrasction\**" />
+    <Compile Remove="GraphQL\BTransaction\**" />
     <EmbeddedResource Remove="AuthToken\**" />
-    <EmbeddedResource Remove="GraphQL\BTrasction\**" />
+    <EmbeddedResource Remove="GraphQL\BTransaction\**" />
     <EntityDeploy Remove="AuthToken\**" />
-    <EntityDeploy Remove="GraphQL\BTrasction\**" />
+    <EntityDeploy Remove="GraphQL\BTransaction\**" />
     <None Remove="AuthToken\**" />
-    <None Remove="GraphQL\BTrasction\**" />
+    <None Remove="GraphQL\BTransaction\**" />
   </ItemGroup>
 
   <ItemGroup>

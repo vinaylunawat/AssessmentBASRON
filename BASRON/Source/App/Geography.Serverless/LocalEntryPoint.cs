@@ -16,8 +16,8 @@ public class LocalEntryPoint
         {
             var services = scope.ServiceProvider;
 
-            var btrasctionProvider = services.GetRequiredService<BTransactionTableCreationProvider>();
-            await btrasctionProvider.Initialize("BTransaction");
+            var btransactionProvider = services.GetRequiredService<BTransactionTableCreationProvider>();
+            await btransactionProvider.Initialize("BTransaction");
 
             var listOfFilesTableCreationProvider = services.GetRequiredService<RequestTableCreationProvider>();
             await listOfFilesTableCreationProvider.Initialize("Request");

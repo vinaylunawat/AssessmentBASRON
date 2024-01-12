@@ -137,7 +137,7 @@ namespace INVCOM.ServerlessTest.TestData
                         new GraphQLModel{ Query="mutation($TransactionId: ID!) { deleteTransaction(TransactionId: $TransactionId) }" ,
                                           Variables=new Dictionary<string, object>
                                           {
-                                              { "TransactionId", "-1" }
+                                              { "btransactionId", "-1" }
                                           }
                         }
                     }

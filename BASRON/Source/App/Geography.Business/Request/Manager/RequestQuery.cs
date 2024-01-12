@@ -27,7 +27,7 @@ namespace BASRON.Business.Request.Manager
             .ResolveAsync(async context => await ResolveRequests().ConfigureAwait(false));
 
             graphType.Field<RequestType>("request")
-            .Argument<NonNullGraphType<IdGraphType>>("request", "id of the btrasction")
+            .Argument<NonNullGraphType<IdGraphType>>("request", "id of the btransaction")
             .ResolveAsync(async context => await ResolveRequest(context).ConfigureAwait(false));
 
             graphType.Field<ListGraphType<RequestType>>("SearchRequestByAttributes")
@@ -37,8 +37,8 @@ namespace BASRON.Business.Request.Manager
 
         private async Task<IEnumerable<RequestReadModel>> ResolveRequests()
         {
-            var dbBTrasction = await _requestRepository.GetAll(default).ConfigureAwait(false);
-            return _mapper.Map<IEnumerable<RequestReadModel>>(dbBTrasction);
+            var dbBTransaction = await _requestRepository.GetAll(default).ConfigureAwait(false);
+            return _mapper.Map<IEnumerable<RequestReadModel>>(dbBTransaction);
         }
 
         private async Task<RequestReadModel> ResolveRequest(IResolveFieldContext<object> context)
