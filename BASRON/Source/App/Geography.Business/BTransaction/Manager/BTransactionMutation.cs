@@ -109,7 +109,7 @@ namespace BASRON.Business.BTransaction.Manager
         private async Task<object> ResolveDeleteTransaction(IResolveFieldContext<object> context)
         {
 
-            var btrasctionId = context.GetArgument<Guid>("btrasctionId");
+            var btrasctionId = context.GetArgument<Guid>("btransactionId");
 
             var dbEntity = await _btransactionRepository.GetByKey(btrasctionId, default).ConfigureAwait(false);
 
