@@ -140,9 +140,9 @@ namespace INVCOM.ServerlessTest.Controllers
             Assert.True(TransactionCountafterAddingNewTransaction > TransactionCountBeforeAddingNewTransaction);
             Assert.Equal(TransactionCountafterAddingNewTransaction, TransactionCountBeforeAddingNewTransaction + 1);
 
-            var variablesData = UpdateTransaction.Variables["Transaction"];
-            ((Dictionary<string, string>)variablesData)["ReferenceNumber"] = addTransactionResult.createBTransaction.referenceNumber.ToString();
-            UpdateTransaction.Variables["Transaction"] = variablesData;
+            var variablesData = UpdateTransaction.Variables["btransaction"];
+            ((Dictionary<string, object>)variablesData)["referenceNumber"] = addTransactionResult.createBTransaction.referenceNumber.ToString();
+            UpdateTransaction.Variables["btransaction"] = variablesData;
             var controllerUpdateResult = await _graphQLController.HandleRequest(UpdateTransaction, cancellationToken);
             Assert.NotNull(controllerUpdateResult);
             Assert.Equal(200, ((ObjectResult)controllerUpdateResult).StatusCode);
@@ -150,14 +150,14 @@ namespace INVCOM.ServerlessTest.Controllers
             Assert.NotNull(updateTransactionResult);
             Assert.NotNull(updateTransactionResult.updateTransaction);
             Assert.NotNull(updateTransactionResult.updateTransaction.referenceNumber);
-            var updateData = ((Dictionary<string, string>)variablesData);
+            var updateData = ((Dictionary<string, object>)variablesData);
             Assert.Equal(updateTransactionResult.updateTransaction.referenceNumber.ToString(), updateData["referenceNumber"]);
             Assert.Equal(updateTransactionResult.updateTransaction.amount.ToString(), updateData["transactionAmount"]);
             Assert.Equal(updateTransactionResult.updateTransaction.transactionType, updateData["transactionType"]);
             //Assert.Equal(updateTransactionResult.updateTransaction.continent, updateData["continent"]);
 
 
-            DeleteTransaction.Variables["ReferenceNumber"] = addTransactionResult.createBTransaction.referenceNumber;
+            DeleteTransaction.Variables["btransactionId"] = addTransactionResult.createBTransaction.referenceNumber;
             var controllerResult = await _graphQLController.HandleRequest(DeleteTransaction, cancellationToken);
             Assert.NotNull(controllerResult);
             Assert.Equal(200, ((ObjectResult)controllerResult).StatusCode);
@@ -192,7 +192,7 @@ namespace INVCOM.ServerlessTest.Controllers
         [MemberData(nameof(GraphQLModelDeleteInvalidData))]
         public async Task Delete_Transaction_With_Invalid_Contry_Id(GraphQLModel DeleteTransaction, CancellationToken cancellationToken = default)
         {
-            DeleteTransaction.Variables["ReferenceNumber"] = Guid.NewGuid().ToString();
+            DeleteTransaction.Variables["btransactionId"] = Guid.NewGuid().ToString();
             var controllerResult = await _graphQLController.HandleRequest(DeleteTransaction, cancellationToken);
             Assert.NotNull(controllerResult);
             Assert.Equal(400, ((ObjectResult)controllerResult).StatusCode);

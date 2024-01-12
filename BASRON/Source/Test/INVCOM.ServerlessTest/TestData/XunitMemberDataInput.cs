@@ -6,7 +6,7 @@ namespace INVCOM.ServerlessTest.TestData
 
     public class XunitMemberDataInput
     {
-         private static  string transDate = "2024-01-02";
+         private static  DateTime transDate = DateTime.Now;
         public static IEnumerable<object[]> GraphQLModelData() =>
         new List<GraphQLModel[]>
           {
