@@ -85,8 +85,10 @@ namespace BASRON.Business.Request.Manager
                 context.Errors.Add(new ExecutionError("Couldn't find request in db."));
                 return null;
             }
-            var dbRequest = _mapper.Map<Entity.Entities.Request>(updateModel);
-            var updatedRequest = await _requestRepository.UpdateAsync(dbRequest, default).ConfigureAwait(false);
+            dbEntity.CreatedDate = DateTime.Now;
+            dbEntity.Status = updateModel.Status;
+            dbEntity.Remark = updateModel.Remark;
+            var updatedRequest = await _requestRepository.UpdateAsync(dbEntity, default).ConfigureAwait(false);
             return _mapper.Map<RequestReadModel>(updatedRequest);
         }
 

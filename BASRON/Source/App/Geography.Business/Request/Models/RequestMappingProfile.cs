@@ -22,7 +22,14 @@ namespace BASRON.Business.Request.Models
             CreateMap<RequestReadModel, Request>()
                .ForMember(x => x.ReferenceNumber, opt => opt.Ignore());
 
-            CreateMap<RequestUpdateModel, Request>();
+            CreateMap<RequestUpdateModel, Request>()
+                  .ForMember(x => x.IsActive, opt => opt.Ignore())
+                  .ForMember(x => x.ReferenceNumber, opt => opt.Ignore())
+                  .ForMember(x => x.Amount, opt => opt.Ignore())
+                  .ForMember(x => x.CustomerId, opt => opt.Ignore())
+                  .ForMember(x => x.CustomerName, opt => opt.Ignore())
+                  .ForMember(x => x.TransactionDate, opt => opt.Ignore())
+                  .ForMember(x => x.TransactionType, opt => opt.Ignore());
         }
     }
 }
