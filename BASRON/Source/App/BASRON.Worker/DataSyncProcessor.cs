@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
+using Framework.DataAccess;
+using BASRON.DataAccess;
+using BASRON.DataAccess.Repository;
 
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -16,6 +19,8 @@ public class DataSyncProcessor
 
     public IConfiguration Configuration { get; private set; }
 
+    private readonly IBTransactionRepository bTransactionRepository;
+
     /// <summary>
     /// Default constructor. This constructor is used by Lambda to construct the instance. When invoked in a Lambda environment
     /// the AWS credentials will come from the IAM role associated with the function and the AWS region will be set to the
@@ -23,10 +28,16 @@ public class DataSyncProcessor
     /// </summary>
     public DataSyncProcessor()
     {
-        var services = new ServiceCollection();
+        var serviceCollection = new ServiceCollection();
         Configuration = new ConfigurationBuilder()
                .AddJsonFile("appSettings.json", optional: true)
         .Build();
+
+        serviceCollection.ConfigureDbServices();
+
+        var serviceProvider = serviceCollection.BuildServiceProvider();
+
+        bTransactionRepository = serviceProvider.GetService<IBTransactionRepository>();
 
     }
 
