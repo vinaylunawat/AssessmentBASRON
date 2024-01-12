@@ -24,7 +24,7 @@ public class Startup
         services.ConfigureClientServices();
         services.ConfigureGraphQLServices();
         services.ConfigureDataProvider();
-        services.ConfigureAwsCongnitoSecurity();
+        //services.ConfigureAwsCongnitoSecurity();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -50,7 +50,8 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapGraphQL<AppSchema>().RequireAuthorization();
+            //endpoints.MapGraphQL<AppSchema>().RequireAuthorization();
+            endpoints.MapGraphQL<AppSchema>();
             endpoints.MapGet("/", async context =>
             {
                 await context.Response.WriteAsync("Welcome to running ASP.NET Core on AWS Lambda");
