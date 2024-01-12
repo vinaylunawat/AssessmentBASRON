@@ -50,7 +50,8 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapGraphQL<AppSchema>();//.RequireAuthorization();
+            //endpoints.MapGraphQL<AppSchema>().RequireAuthorization();
+            endpoints.MapGraphQL<AppSchema>();
             endpoints.MapGet("/", async context =>
             {
                 await context.Response.WriteAsync("Welcome to running ASP.NET Core on AWS Lambda");

@@ -39,7 +39,7 @@ namespace BASRON.Business.BTransaction.Manager
             .ResolveAsync(async context => await ResolveBTransaction(context).ConfigureAwait(false));
 
             graphType.Field<ListGraphType<BTransactionType>>("GetCustomerTransactionByAttributes")
-                  .Argument<BTransactionSearchType>("btransaction", "object of btrasction")
+                  .Argument<BTransactionSearchType>("btransaction", "object of btransaction")
            .ResolveAsync(async context => await ResolveGetTransactionByAttributes(context).ConfigureAwait(false));
 
         }
@@ -58,8 +58,8 @@ namespace BASRON.Business.BTransaction.Manager
             var key = context.GetArgument<Guid>("btransactionId");
             if (key != Guid.Empty)
             {
-                var dbBTrasction = await _btransactionRepository.GetByKey(key, default).ConfigureAwait(false);
-                var mappedData = _mapper.Map<BTransactionReadModel>(dbBTrasction);
+                var dbBTransaction = await _btransactionRepository.GetByKey(key, default).ConfigureAwait(false);
+                var mappedData = _mapper.Map<BTransactionReadModel>(dbBTransaction);
                 mappedData.TotalSum = mappedData.Amount;
                 return mappedData;
             }
@@ -95,8 +95,8 @@ namespace BASRON.Business.BTransaction.Manager
             }
             try
             {
-                var dbBTrasction = await _btransactionRepository.GetPaginatedScanItemsAsync(data).ConfigureAwait(false);
-                var res = _mapper.Map<IEnumerable<BTransactionReadModel>>(dbBTrasction);
+                var dbBTransaction = await _btransactionRepository.GetPaginatedScanItemsAsync(data).ConfigureAwait(false);
+                var res = _mapper.Map<IEnumerable<BTransactionReadModel>>(dbBTransaction);
                 return res;
 
             }

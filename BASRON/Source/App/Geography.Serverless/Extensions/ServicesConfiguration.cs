@@ -33,7 +33,7 @@ namespace BASRON.Serverless.Extensions
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddAutoMapper(typeof(BTransactionMappingProfile).Assembly);
-            //services.AddAutoMapper(typeof(BTrasctionMappingProfile).Assembly);
+            //services.AddAutoMapper(typeof(BTransactionMappingProfile).Assembly);
             return services;
         }
 

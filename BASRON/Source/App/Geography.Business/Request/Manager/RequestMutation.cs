@@ -63,8 +63,8 @@ namespace BASRON.Business.Request.Manager
 
             var dbEntity = _mapper.Map<Entity.Entities.Request>(request);
             dbEntity.ReferenceNumber = Guid.NewGuid();
-            var addedBTrasction = await _requestRepository.CreateAsync(dbEntity, default).ConfigureAwait(false);
-            var result = _mapper.Map<RequestReadModel>(addedBTrasction);
+            var addedBTransaction = await _requestRepository.CreateAsync(dbEntity, default).ConfigureAwait(false);
+            var result = _mapper.Map<RequestReadModel>(addedBTransaction);
             return result;
 
         }        

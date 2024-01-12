@@ -1,6 +1,6 @@
-﻿using Framework.Configuration;
-using Framework.Configuration.Models;
 using BASRON.Service;
+using Framework.Configuration;
+using Framework.Configuration.Models;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace BASRON.ServerlessTests
+namespace BASRON.ServerlessTest
 {
     /// <summary>
     /// Defines the <see cref="TestFixture" />.
@@ -50,3 +50,4 @@ namespace BASRON.ServerlessTests
         }
     }
 }
+

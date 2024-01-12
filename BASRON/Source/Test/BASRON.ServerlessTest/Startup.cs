@@ -1,13 +1,13 @@
-﻿using Framework.Business.ServiceProvider.Storage;
-using Framework.Configuration.Models;
 using BASRON.Business;
 using BASRON.Serverless.Extensions;
+using Framework.Business.ServiceProvider.Storage;
+using Framework.Configuration.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BASRON.ServerlessTests
+namespace BASRON.ServerlessTest
 {
     /// <summary>
     /// Defines the <see cref="Startup" />.

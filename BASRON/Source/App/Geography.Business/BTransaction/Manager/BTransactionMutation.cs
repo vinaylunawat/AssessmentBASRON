@@ -36,15 +36,15 @@ namespace BASRON.Business.BTransaction.Manager
         public void RegisterField(ObjectGraphType graphType)
         {
             graphType.Field<BTransactionType>("createBTransaction")
-               .Argument<NonNullGraphType<BTransactionCreateInputType>>("btransaction", "object of btrasction")
+               .Argument<NonNullGraphType<BTransactionCreateInputType>>("btransaction", "object of btransaction")
                .ResolveAsync(async context => await ResolveCreateTransaction(context).ConfigureAwait(false));
 
             graphType.Field<BTransactionType>("updateBTransaction")
-                .Argument<NonNullGraphType<BTransactionUpdateInputType>>("btransaction", "object of btrasction")
+                .Argument<NonNullGraphType<BTransactionUpdateInputType>>("btransaction", "object of btransaction")
                 .ResolveAsync(async context => await ResolveUpdateTransaction(context).ConfigureAwait(false));
 
             graphType.Field<StringGraphType>("deleteBTransaction")
-            .Argument<NonNullGraphType<IdGraphType>>("btransactionId", "id of btrasction")
+            .Argument<NonNullGraphType<IdGraphType>>("btransactionId", "id of btransaction")
             .ResolveAsync(async context => await ResolveDeleteTransaction(context).ConfigureAwait(false));
 
             
@@ -52,9 +52,9 @@ namespace BASRON.Business.BTransaction.Manager
 
         private async Task<BTransactionReadModel> ResolveCreateTransaction(IResolveFieldContext<object> context)
         {
-            var btrasction = context.GetArgument<BTransactionCreateModel>("btransaction");
+            var btransaction = context.GetArgument<BTransactionCreateModel>("btransaction");
 
-            var validationResult = _btransactionCreateValidator.Validate(btrasction);
+            var validationResult = _btransactionCreateValidator.Validate(btransaction);
 
             if (!validationResult.IsValid)
             {
@@ -65,10 +65,10 @@ namespace BASRON.Business.BTransaction.Manager
          
             try
             {
-                var dbEntity = _mapper.Map<Entity.Entities.BTransaction>(btrasction);
+                var dbEntity = _mapper.Map<Entity.Entities.BTransaction>(btransaction);
                 dbEntity.ReferenceNumber = Guid.NewGuid();
-                var addedBTrasction = await _btransactionRepository.CreateAsync(dbEntity, default).ConfigureAwait(false);
-                var result = _mapper.Map<BTransactionReadModel>(addedBTrasction);
+                var addedBTransaction = await _btransactionRepository.CreateAsync(dbEntity, default).ConfigureAwait(false);
+                var result = _mapper.Map<BTransactionReadModel>(addedBTransaction);
                 return result;
 
             }
@@ -84,9 +84,9 @@ namespace BASRON.Business.BTransaction.Manager
         private async Task<BTransactionReadModel> ResolveUpdateTransaction(IResolveFieldContext<object> context)
         {
 
-            var btrasctionUpdateModel = context.GetArgument<BTransactionUpdateModel>("btransaction");
+            var btransactionUpdateModel = context.GetArgument<BTransactionUpdateModel>("btransaction");
 
-            var validationResult = _btransactionUpdateValidator.Validate(btrasctionUpdateModel);
+            var validationResult = _btransactionUpdateValidator.Validate(btransactionUpdateModel);
 
             if (!validationResult.IsValid)
             {
@@ -94,36 +94,36 @@ namespace BASRON.Business.BTransaction.Manager
                 return null;
             }
 
-            var dbEntity = await _btransactionRepository.GetByKey(btrasctionUpdateModel.ReferenceNumber, default).ConfigureAwait(false);
+            var dbEntity = await _btransactionRepository.GetByKey(btransactionUpdateModel.ReferenceNumber, default).ConfigureAwait(false);
             if (dbEntity == null)
             {
-                context.Errors.Add(new ExecutionError("Couldn't find btrasction in db."));
+                context.Errors.Add(new ExecutionError("Couldn't find btransaction in db."));
                 return null;
             }
-            var dbBTrasction = _mapper.Map<Entity.Entities.BTransaction>(btrasctionUpdateModel);
-            var updatedBTrasction = await _btransactionRepository.UpdateAsync(dbBTrasction, default).ConfigureAwait(false);
-            return _mapper.Map<BTransactionReadModel>(updatedBTrasction);
+            var dbBTransaction = _mapper.Map<Entity.Entities.BTransaction>(btransactionUpdateModel);
+            var updatedBTransaction = await _btransactionRepository.UpdateAsync(dbBTransaction, default).ConfigureAwait(false);
+            return _mapper.Map<BTransactionReadModel>(updatedBTransaction);
 
         }
 
         private async Task<object> ResolveDeleteTransaction(IResolveFieldContext<object> context)
         {
 
-            var btrasctionId = context.GetArgument<Guid>("btrasctionId");
+            var btransactionId = context.GetArgument<Guid>("btransactionId");
 
-            var dbEntity = await _btransactionRepository.GetByKey(btrasctionId, default).ConfigureAwait(false);
+            var dbEntity = await _btransactionRepository.GetByKey(btransactionId, default).ConfigureAwait(false);
 
             if (dbEntity == null)
             {
-                context.Errors.Add(new ExecutionError("Couldn't find btrasction in db."));
+                context.Errors.Add(new ExecutionError("Couldn't find btransaction in db."));
                 return null;
             }
 
-            await _btransactionRepository.DeleteAsync(btrasctionId, default).ConfigureAwait(false);
+            await _btransactionRepository.DeleteAsync(btransactionId, default).ConfigureAwait(false);
 
             var res = new MutationResponse()
             {
-                Message = $"The btrasction with the id: {btrasctionId} has been successfully deleted from db."
+                Message = $"The btransaction with the id: {btransactionId} has been successfully deleted from db."
             };
             return res.Message;
         }
