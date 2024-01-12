@@ -12,7 +12,7 @@ namespace BASRON.DataAccess
     {
         private readonly ILogger<DynamoDBClientProviderBase> _logger;
         private readonly IAmazonDynamoDB _client;
-        private const string TableName = "Transaction";
+        private const string TableName = "BTransaction";
 
         public BTransactionTableCreationProvider(ILogger<DynamoDBClientProviderBase> logger, IAmazonDynamoDB amazonDynamoDBClient)
             : base(logger, amazonDynamoDBClient)
