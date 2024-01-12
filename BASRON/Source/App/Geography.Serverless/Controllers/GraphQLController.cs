@@ -12,7 +12,7 @@ namespace BASRON.Service
 {
     [Route("api/graphql")]
     [ApiController]
-    //[Microsoft.AspNetCore.Authorization.Authorize]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     public class GraphQLController : ControllerBase
     {
         private readonly IDocumentExecuter _documentExecuter;
