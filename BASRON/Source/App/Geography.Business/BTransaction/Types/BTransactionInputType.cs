@@ -8,16 +8,16 @@ namespace BASRON.Business.BTransaction.Types
         public BTransactionCreateInputType()
         {
             Name = "btransactionCreateInput";
-            Field<NonNullGraphType<IdGraphType>>("customerId");
-            Field<NonNullGraphType<DateGraphType>>("transactionDate");
+            Field<NonNullGraphType<StringGraphType>>("customerId");
+            Field<NonNullGraphType<DateTimeGraphType>>("transactionDate");
             Field<NonNullGraphType<IdGraphType>>("referenceNumber");
             Field<NonNullGraphType<DecimalGraphType>>("amount");           
             Field<NonNullGraphType<StringGraphType>>("transactionType");
             Field<NonNullGraphType<StringGraphType>>("customerName");
             Field<NonNullGraphType<StringGraphType>>("productType");
             Field<NonNullGraphType<StringGraphType>>("currency");
-            Field<NonNullGraphType<DateGraphType>>("createdDate");
-            Field<NonNullGraphType<DateGraphType>>("updatedDate");
+            Field<NonNullGraphType<DateTimeGraphType>>("createdDate");
+            Field<NonNullGraphType<DateTimeGraphType>>("updatedDate");
             Field<NonNullGraphType<BooleanGraphType>>("isActive");
         }
     }
@@ -30,7 +30,7 @@ namespace BASRON.Business.BTransaction.Types
             Field<IdGraphType>("Id");
             Field<NonNullGraphType<StringGraphType>>("customerId");
             Field<NonNullGraphType<DecimalGraphType>>("amount");
-            Field<NonNullGraphType<DateGraphType>>("trasctionDate");
+            Field<NonNullGraphType<DateTimeGraphType>>("trasctionDate");
             Field<NonNullGraphType<StringGraphType>>("trasctionType");
             Field<NonNullGraphType<IdGraphType>>("referenceNumber");
             Field<NonNullGraphType<StringGraphType>>("trasctionStatus");

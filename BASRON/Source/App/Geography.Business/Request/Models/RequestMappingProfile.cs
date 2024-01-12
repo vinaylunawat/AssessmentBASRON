@@ -1,6 +1,7 @@
 namespace BASRON.Business.Request.Models
 {
     using AutoMapper;
+    using BASRON.Business.BTransaction.Models;
     using BASRON.Entity.Entities;
 
     /// <summary>
@@ -17,6 +18,9 @@ namespace BASRON.Business.Request.Models
 
             CreateMap<RequestCreateModel, Request>()
                 .ForMember(x => x.ReferenceNumber, opt => opt.Ignore());
+
+            CreateMap<RequestReadModel, Request>()
+               .ForMember(x => x.ReferenceNumber, opt => opt.Ignore());
 
             CreateMap<RequestUpdateModel, Request>();
         }

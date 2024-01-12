@@ -4,6 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
+using Framework.DataAccess;
+using BASRON.DataAccess;
+using BASRON.DataAccess.Repository;
+using AutoMapper;
 
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -13,30 +17,28 @@ namespace BASRON.Worker;
 
 public class DataSyncProcessor
 {
-
+    private readonly IBTransactionRepository bTransactionRepository;
+    private readonly IRequestRepository requestRepository;
+    private readonly IMapper mapper;
     public IConfiguration Configuration { get; private set; }
 
-    /// <summary>
-    /// Default constructor. This constructor is used by Lambda to construct the instance. When invoked in a Lambda environment
-    /// the AWS credentials will come from the IAM role associated with the function and the AWS region will be set to the
-    /// region the Lambda function is executed in.
-    /// </summary>
     public DataSyncProcessor()
     {
-        var services = new ServiceCollection();
+        var serviceCollection = new ServiceCollection();
         Configuration = new ConfigurationBuilder()
                .AddJsonFile("appSettings.json", optional: true)
         .Build();
 
+        serviceCollection.ConfigureDbServices();
+
+        var serviceProvider = serviceCollection.BuildServiceProvider();
+
+        bTransactionRepository = serviceProvider.GetService<IBTransactionRepository>();
+        requestRepository = serviceProvider.GetService<IRequestRepository>();
+        mapper = serviceProvider.GetService<IMapper>();
+
     }
 
-    /// <summary>
-    /// This method is called for every Lambda invocation. This method takes in an SQS event object and can be used 
-    /// to respond to SQS messages.
-    /// </summary>
-    /// <param name="evnt"></param>
-    /// <param name="context"></param>
-    /// <returns></returns>
     public async Task ProcessAsync(SQSEvent evnt, ILambdaContext context)
     {
         foreach (var message in evnt.Records)
@@ -50,8 +52,18 @@ public class DataSyncProcessor
         context.Logger.LogInformation($"Processed message {message.Body}");
         //var model = JsonConvert.DeserializeObject<TModel>(message.Body);
 
+        var transactionDetail = mapper.Map<Entity.Entities.BTransaction>(message.Body);
+        if(transactionDetail != null)
+        {
+            await bTransactionRepository.CreateAsync(transactionDetail, default).ConfigureAwait(false);
+            var request = await requestRepository.GetByKey(transactionDetail.ReferenceNumber, default).ConfigureAwait(false);
+            if (request is not null)
+            {
+                request.Status = "Reconciled";
+                await requestRepository.UpdateAsync(request, default).ConfigureAwait(false);
+            }
+        }
 
-        // TODO: Do interesting work based on the new message
         await Task.CompletedTask;
     }
 }

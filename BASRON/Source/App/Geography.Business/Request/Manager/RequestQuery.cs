@@ -7,6 +7,7 @@ using GraphQL;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BASRON.Business.Request.Manager
@@ -28,6 +29,10 @@ namespace BASRON.Business.Request.Manager
             graphType.Field<RequestType>("request")
             .Argument<NonNullGraphType<IdGraphType>>("request", "id of the btrasction")
             .ResolveAsync(async context => await ResolveRequest(context).ConfigureAwait(false));
+
+            graphType.Field<ListGraphType<RequestType>>("SearchRequestByAttributes")
+                 .Argument<RequestSearchType>("requestSearch", "object of request")
+          .ResolveAsync(async context => await ResolveSearchRequestByAttributes(context).ConfigureAwait(false));
         }
 
         private async Task<IEnumerable<RequestReadModel>> ResolveRequests()
@@ -51,5 +56,40 @@ namespace BASRON.Business.Request.Manager
             }
         }
 
+        private async Task<IEnumerable<RequestReadModel>> ResolveSearchRequestByAttributes(IResolveFieldContext<object> context)
+        {
+            var requestData = context.GetArgument<RequestReadModel>("requestData");
+
+            var dbEntity = _mapper.Map<Entity.Entities.Request>(requestData);
+
+            Dictionary<string, string> data = new Dictionary<string, string>();
+
+            var filterAttrbutes = context.Variables.Select(x => x.Value).ToList();
+
+            foreach (var entity in filterAttrbutes)
+            {
+                var keysData = ((Dictionary<string, object>)entity);
+                var listOfKeys = ((Dictionary<string, object>)entity);
+
+                foreach (var key in listOfKeys)
+                {
+                    if (Enum.TryParse<RequestField>(key.Key, true, out var actualFieldValue))
+                    {
+                        data.Add(actualFieldValue.ToString(), Convert.ToString(key.Value));
+                    }
+                }
+            }
+            try
+            {
+                var dbRequest = await _requestRepository.GetPaginatedScanItemsAsync(data).ConfigureAwait(false);
+                var res = _mapper.Map<IEnumerable<RequestReadModel>>(dbRequest);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
     }
 }

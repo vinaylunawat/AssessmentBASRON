@@ -94,7 +94,7 @@ namespace BASRON.Business.BTransaction.Manager
                 return null;
             }
 
-            var dbEntity = await _btransactionRepository.GetByKey(btrasctionUpdateModel.Id, default).ConfigureAwait(false);
+            var dbEntity = await _btransactionRepository.GetByKey(btrasctionUpdateModel.ReferenceNumber, default).ConfigureAwait(false);
             if (dbEntity == null)
             {
                 context.Errors.Add(new ExecutionError("Couldn't find btrasction in db."));

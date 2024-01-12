@@ -17,6 +17,10 @@ namespace BASRON.Business.Request.Models
         public string CustomerName { get; set; }
 
         public string Remark { get; set; }
-        public string TransactionType { get; set; } 
+        public string TransactionType { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }

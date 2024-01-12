@@ -7,8 +7,7 @@ namespace BASRON.Business.BTransaction.Models
     /// </summary>
     public class BTransactionReadModel
     {
-        public Guid Id { get; set; }
-        public Guid CustomerId { get; set; }
+        public string CustomerId { get; set; }
         public string CustomerName { get; set; }
         public DateTime TransactionDate { get; set; }
         public Guid ReferenceNumber { get; set; }
@@ -19,5 +18,7 @@ namespace BASRON.Business.BTransaction.Models
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool IsActive { get; set; }
+        public decimal TotalSum { get; set; }
+
     }
 }

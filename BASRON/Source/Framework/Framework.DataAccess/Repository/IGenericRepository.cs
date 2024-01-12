@@ -16,7 +16,9 @@
 
         Task<TEntity> GetByKey<TKey, TRangeKey>(TKey key, TRangeKey rangeKey, CancellationToken cancellationToken);
 
-        Task<PagedResultModel<TEntity>> GetPaginatedScanItemsAsync(int pageSize = 5, string lastEvaluatedKey = null, IEnumerable<string> projectionFields = default);
+        //Task<PagedResultModel<TEntity>> GetPaginatedScanItemsAsync(int pageSize = 5, string lastEvaluatedKey = null, IEnumerable<string> projectionFields = default);
+
+        Task<IEnumerable<TEntity>> GetPaginatedScanItemsAsync(Dictionary<string, string> data = default);
 
         Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken);
         Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken);

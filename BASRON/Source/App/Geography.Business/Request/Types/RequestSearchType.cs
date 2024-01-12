@@ -3,16 +3,16 @@ using System;
 
 namespace BASRON.Business.Request.Types
 {
-    public class RequestCreateInputType : InputObjectGraphType
+    public class RequestSearchType : InputObjectGraphType
     {
-        public RequestCreateInputType()
+        public RequestSearchType()
         {
-            Name = "requestCreateInput";
+            Name = "requestSearchInput";
             Field<IdGraphType>("customerId");
-            Field<NonNullGraphType<DateTimeGraphType>>("transactionDate");
-            Field <NonNullGraphType<IdGraphType>>("referenceNumber");
+            Field<DateTimeGraphType>("transactionDate");
+            Field<IdGraphType>("referenceNumber");
             Field<StringGraphType>("customerName");
-            Field<NonNullGraphType<DecimalGraphType>>("amount");
+            Field<DecimalGraphType>("amount");
             Field<StringGraphType>("status");
             Field<StringGraphType>("remark");
             Field<StringGraphType>("transactionType");

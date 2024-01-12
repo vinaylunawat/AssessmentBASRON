@@ -11,6 +11,7 @@ namespace BASRON.Business.Request.Types
             Field<IdGraphType>("referenceNumber");
             Field<NonNullGraphType<StringGraphType>>("status");
             Field<StringGraphType>("remark");
+            Field<NonNullGraphType<DateTimeGraphType>>("createdDate");
         }
     }
  

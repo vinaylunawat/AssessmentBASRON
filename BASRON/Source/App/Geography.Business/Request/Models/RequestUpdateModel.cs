@@ -12,5 +12,8 @@ namespace BASRON.Business.Request.Models
         public string CustomerId { get; set; }
         public string Status { get; set; }
         public string Remark { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool IsActive { get; set; }
+
     }
 }
