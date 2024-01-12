@@ -2,6 +2,7 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.SQSEvents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 
 
@@ -29,9 +30,6 @@ public class DataSyncProcessor
 
     }
 
-
-
-
     /// <summary>
     /// This method is called for every Lambda invocation. This method takes in an SQS event object and can be used 
     /// to respond to SQS messages.
@@ -50,6 +48,8 @@ public class DataSyncProcessor
     private async Task ProcessMessageAsync(SQSEvent.SQSMessage message, ILambdaContext context)
     {
         context.Logger.LogInformation($"Processed message {message.Body}");
+        //var model = JsonConvert.DeserializeObject<TModel>(message.Body);
+
 
         // TODO: Do interesting work based on the new message
         await Task.CompletedTask;
