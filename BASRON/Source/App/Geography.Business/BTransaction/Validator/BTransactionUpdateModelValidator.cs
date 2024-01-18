@@ -7,7 +7,7 @@ namespace BASRON.Business.BTransaction.Validator
     {
         public BTransactionUpdateModelValidator()
         {
-            RuleFor(x => x.CustomerId).NotEmpty().WithMessage("CountryId is required");
+            RuleFor(x => x.CustomerId).NotEmpty().WithMessage("CustomerId is required");
         }
 
     }

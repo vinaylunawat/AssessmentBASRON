@@ -44,18 +44,6 @@ public class LambdaEntryPoint :
     /// </summary>
     /// <param name="builder"></param>
     protected async override void Init(IHostBuilder builder)
-    {
-        //var host = builder.Build();
-        //using (var scope = host.Services.CreateScope())
-        //{
-        //    var services = scope.ServiceProvider;
-
-        //    var countryProvider = services.GetRequiredService<CountryTableCreationProvider>();
-        //    await countryProvider.Initialize("Country");
-
-        //    var btransactionProvider = services.GetRequiredService<BTransactionTableCreationProvider>();
-        //    await btransactionProvider.Initialize("BTransaction");
-
-        //}
+    {         
     }
 }

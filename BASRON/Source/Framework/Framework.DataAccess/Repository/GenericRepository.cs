@@ -38,34 +38,7 @@
         public async Task<TEntity> GetByKey<TKey>(TKey key, CancellationToken cancellationToken)
         {
             return await _dynamoDBContext.LoadAsync<TEntity>(key, cancellationToken);
-        }
-
-        public async Task<bool> GetDetailsByAttributeName(string attributeName, string attributeValue)
-        {
-            var request = new ScanRequest
-            {
-                TableName = "Country",
-                ExpressionAttributeNames = new Dictionary<string, string>
-                {
-                  { $"#{attributeName}", attributeName },
-                },
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>
-                {
-                    { ":name", new AttributeValue { S = attributeValue } },
-                },
-                FilterExpression = $"#{attributeName} = :name",
-                ProjectionExpression = $"#{attributeName}, Id",
-                Limit = 10
-            };
-
-            var response = await _client.ScanAsync(request).ConfigureAwait(false);
-
-            if (response.Count > 0)
-            {
-                return true;
-            }
-            return false;
-        }
+        }         
 
         public async Task<TEntity> GetByKey<TKey, TRangeKey>(TKey key, TRangeKey rangeKey, CancellationToken cancellationToken)
         {

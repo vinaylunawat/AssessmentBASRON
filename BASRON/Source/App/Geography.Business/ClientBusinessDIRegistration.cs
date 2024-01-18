@@ -2,14 +2,10 @@
 {
     using BASRON.Business.BTransaction.Manager;
     using BASRON.Business.BTransaction.Types;
-    using BASRON.Business.BTransaction.Validator;
-    //using BASRON.Business.Country.Manager;
-    //using BASRON.Business.Country.Types;
-    //using BASRON.Business.Country.Validator;
+    using BASRON.Business.BTransaction.Validator;    
     using BASRON.Business.GraphQL;
     using global::GraphQL;
-    using global::GraphQL.Types;
-    //using Framework.Business;
+    using global::GraphQL.Types;    
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

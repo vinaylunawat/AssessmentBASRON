@@ -23,8 +23,7 @@ namespace BASRON.Serverless.Extensions
         public static IServiceCollection ConfigureClientServices(this IServiceCollection services)
         {            
             return services
-                .ConfigureAutoMapper()
-                //.AddManagers(typeof(CountryManager).Assembly)
+                .ConfigureAutoMapper()                
                 .ConfigureDbServices();
 
         }
@@ -32,8 +31,7 @@ namespace BASRON.Serverless.Extensions
         public static IServiceCollection ConfigureAutoMapper(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddAutoMapper(typeof(BTransactionMappingProfile).Assembly);
-            //services.AddAutoMapper(typeof(BTransactionMappingProfile).Assembly);
+            services.AddAutoMapper(typeof(BTransactionMappingProfile).Assembly);            
             return services;
         }
 
